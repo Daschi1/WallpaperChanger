@@ -243,3 +243,8 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/java,gradle,intellij,intellij+all,intellij+iml
+
+#custom
+
+WallpaperChanger/jre-14.0.1-full
+WallpaperChanger/WallpaperChanger
