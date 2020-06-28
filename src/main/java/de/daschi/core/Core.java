@@ -59,7 +59,7 @@ public class Core {
                 yamlConfiguration.set("clientId", "");
                 yamlConfiguration.set("secret", "");
                 yamlConfiguration.set("index", 0);
-                yamlConfiguration.set("ignoreHorizontal", true);
+                yamlConfiguration.set("ignoreVertical", true);
                 yamlConfiguration.save(file);
             } else {
                 final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
@@ -109,7 +109,7 @@ public class Core {
         final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File("WallpaperChanger\\config.yml"));
         final String saveUrl = Core.getHourSaveUrl();
 
-        if (Core.isIgnoreHorizontal()) {
+        if (Core.isIgnoreVertical()) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(new URL(yamlConfiguration.getString(saveUrl + index + ".imageUrl")));
                 while (!(bufferedImage.getWidth() > bufferedImage.getHeight())) {
@@ -147,20 +147,20 @@ public class Core {
         }
     }
 
-    public static void setIgnoreHorizontal(final boolean ignoreHorizontal) {
+    public static void setIgnoreVertical(final boolean ignoreVertical) {
         try {
             final File file = new File("WallpaperChanger\\config.yml");
             final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
-            yamlConfiguration.set("ignoreHorizontal", ignoreHorizontal);
+            yamlConfiguration.set("ignoreVertical", ignoreVertical);
             yamlConfiguration.save(file);
         } catch (final IOException exception) {
             exception.printStackTrace();
         }
     }
 
-    public static boolean isIgnoreHorizontal() {
+    public static boolean isIgnoreVertical() {
         final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File("WallpaperChanger\\config.yml"));
-        return yamlConfiguration.getBoolean("ignoreHorizontal");
+        return yamlConfiguration.getBoolean("ignoreVertical");
     }
 
     public static void setIndex(final int index) {
@@ -187,7 +187,7 @@ public class Core {
         if (!yamlConfiguration.contains(saveUrl + (Core.getIndex() + tempIndex))) {
             tempIndex = -Core.getIndex();
         }
-        if (Core.isIgnoreHorizontal()) {
+        if (Core.isIgnoreVertical()) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(new URL(yamlConfiguration.getString(saveUrl + (Core.getIndex() + tempIndex) + ".imageUrl")));
                 while (!(bufferedImage.getWidth() > bufferedImage.getHeight())) {
