@@ -15,7 +15,7 @@ public class Main {
 
     private static TrayIcon trayIcon;
     private static final MenuItem title = new MenuItem("");
-    private static final MenuItem ignoreHorizontal = new MenuItem("");
+    private static final MenuItem ignoreVertical = new MenuItem("");
     private static final MenuItem nextImage = new MenuItem("");
 
     public static void main(final String[] args) throws IOException {
@@ -41,15 +41,15 @@ public class Main {
 
             final PopupMenu popup = new PopupMenu();
             popup.add(Main.title);
-            Main.ignoreHorizontal.addActionListener(e -> {
-                Core.setIgnoreHorizontal(!Core.isIgnoreHorizontal());
+            Main.ignoreVertical.addActionListener(e -> {
+                Core.setIgnoreVertical(!Core.isIgnoreVertical());
                 try {
                     Main.updateSystemTray();
                 } catch (final IOException exception) {
                     exception.printStackTrace();
                 }
             });
-            popup.add(Main.ignoreHorizontal);
+            popup.add(Main.ignoreVertical);
             Main.nextImage.addActionListener(e -> Core.nextImage());
             popup.add(Main.nextImage);
             final MenuItem exit = new MenuItem("Exit");
@@ -73,7 +73,7 @@ public class Main {
         final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(new File("WallpaperChanger\\config.yml"));
         Main.trayIcon.setImage(ImageIO.read(new File("WallpaperChanger\\image.jpg")));
         Main.title.setLabel(yamlConfiguration.getString(saveUrl + Core.getIndex() + ".name"));
-        Main.ignoreHorizontal.setLabel(Core.isIgnoreHorizontal() ? "Ignore horizontal - on" : "Ignore horizontal - off");
+        Main.ignoreVertical.setLabel(Core.isIgnoreVertical() ? "Ignore vertical - on" : "Ignore vertical - off");
         Main.nextImage.setLabel("Next image (Currently number " + Core.getIndex() + ")");
     }
 }
